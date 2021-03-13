@@ -3,3 +3,5 @@
 ```
 npm i
 ```
+###Please create a file .env with 
+PORT and MONGODB_CNN Global variables
