@@ -2,12 +2,14 @@ const express =  require('express');
 const cors = require('cors');
 const Route = require('../routes/Routes');
 const { dbConection } = require('../database/config');
+const { Router } = require('express');
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT; 
         this.usersPath='/users';
+        this.authPath = '/auth';
 
         this.connectDB();
 
@@ -26,7 +28,8 @@ class Server{
         this.app.use(express.static('public'))
     }
     routes(){
-        this.app.use(this.usersPath, Route.users);
+        this.app.use(this.usersPath, Route.Users);
+        this.app.use(this.authPath,Route.Auth);
 
         this.app.get("/",(req,res) =>{
             res.status(200).send({Hola:'Que miras?'})

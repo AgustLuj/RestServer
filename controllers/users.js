@@ -8,15 +8,29 @@ const usersGetPath = (req,res=response)=>{
     res.status(200).send({err:false})
 }
 /// /users POST
-const usersPostPath = (req,res=response)=>{
-    let {name,password,rol} = req.body;
-    const user = new User({name,password,rol})
+const usersPostPath = async(req,res=response)=>{
+    let {name,email,password} = req.body;
+    try {
+        password = password.toString();
+        
+        const user = new User({name,password,email,rol:'USER_ROLE'})
 
-    const salt = bcryptjs.genSaltSync();
+        const salt = bcryptjs.genSaltSync();
 
-    user.password = bcryptjs.hashSync(password,salt);
+        user.password = bcryptjs.hashSync(password,salt);
 
-    res.status(200).send(user);
+        await user.save();
+
+        res.status(200).send(user);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            msg:'Los servidores estan prendidos fuegos contacte al admistrador'
+        })
+    }
+
+
+    
 }
 
 /// /users/email
