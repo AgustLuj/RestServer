@@ -1,9 +1,13 @@
 const express =  require('express');
 const cors = require('cors');
-const Route = require('../routes/Routes');
+const {
+    Users,
+    Auth
+} = require('../Routes');
 const { dbConection } = require('../database/config');
 const { Router } = require('express');
-
+const { googleSignIn } = require('../helpers/google');
+//googleSignIn();
 class Server{
     constructor(){
         this.app = express();
@@ -28,8 +32,8 @@ class Server{
         this.app.use(express.static('public'))
     }
     routes(){
-        this.app.use(this.usersPath, Route.Users);
-        this.app.use(this.authPath,Route.Auth);
+        this.app.use(this.usersPath, Users);
+        this.app.use(this.authPath, Auth);
 
         this.app.get("/",(req,res) =>{
             res.status(200).send({Hola:'Que miras?'})

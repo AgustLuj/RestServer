@@ -39,9 +39,23 @@ const userEmailPath=(req,res=response)=>{
     return res.status(200).json({err:false})
 
 }
+const userDelete = async(req, res = response) => {
 
+    const { id:_id } = req.params;
+    const {uid}=req;
+    
+    console.log(uid)
+    // Fisicamente lo borramos
+    // const usuario = await Usuario.findByIdAndDelete( id );
+
+    const user = await User.findByIdAndUpdate( _id, { state: false } );
+
+
+    res.json(user);
+}
 module.exports={
     usersGetPath,
     usersPostPath,
-    userEmailPath
+    userEmailPath,
+    userDelete
 }
