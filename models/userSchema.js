@@ -19,8 +19,7 @@ const UserSchema = Schema({
     },
     rol:{
         type:String,
-        required:true,
-        emun:['ADMIN_ROL','USER_ROLE']
+        default:'USER_ROLE',
     },
     state:{
         type:Boolean,

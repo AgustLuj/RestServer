@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const { check } = require('express-validator');
-const { loginPostPath } = require('../controllers/auth');
+const { loginPostPath,loginPostGoogle } = require('../controllers/auth');
 const{
     validationQuerry,
     validatorJWT
@@ -15,5 +15,9 @@ router.post('/login',[
     validationQuerry,
 ],loginPostPath);
 
+router.post('/google/login',[
+    check('idToken','El token es obligatorio').notEmpty(),
+    validationQuerry,
+],loginPostGoogle);
 
 module.exports= router;

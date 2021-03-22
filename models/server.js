@@ -5,9 +5,7 @@ const {
     Auth
 } = require('../Routes');
 const { dbConection } = require('../database/config');
-const { Router } = require('express');
-const { googleSignIn } = require('../helpers/google');
-//googleSignIn();
+
 class Server{
     constructor(){
         this.app = express();
